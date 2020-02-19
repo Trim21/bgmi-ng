@@ -1,0 +1,32 @@
+# specific branch build with batching
+trigger:
+  batch: true
+  branches:
+    include:
+      - '*'
+    exclude:
+      - renovate/*
+  paths:
+    include:
+      - '*'
+    exclude:
+      - '.github/'
+      - 'README.rst'
+      - 'codecov.yml'
+      - '.readthedocs.yml'
+      - '.gitignore'
+      - '.editorconfig'
+
+schedules:
+  - cron: "0 12 * * 6"
+    displayName: Weekly Saturday build
+    branches:
+      include:
+        - master
+        - dev
+    always: true
+
+stages:
+  - stage: Lint
+    jobs:
+      - template: ./templates/jobs/lint.yaml

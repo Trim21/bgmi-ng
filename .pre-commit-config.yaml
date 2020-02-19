@@ -1,0 +1,75 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.5.0
+    hooks:
+      - id: check-merge-conflict
+        exclude: '\.rst$'
+
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-docstring-first
+      - id: mixed-line-ending
+        args: [--fix=lf]
+        exclude: '\.vbs$'
+      - id: mixed-line-ending
+        args: [--fix=crlf]
+        files: '\.vbs$'
+
+      - id: check-json
+      # check for file bigger than 500kb
+      - id: check-added-large-files
+      - id: check-yaml
+      - id: debug-statements
+      - id: fix-encoding-pragma
+        args: [--remove]
+
+  - repo: https://github.com/Trim21/find-trailing-comma
+    rev: v0.0.1
+    hooks:
+      - id: find-trailing-comma
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v1.26.2
+    hooks:
+      - id: pyupgrade
+        args: ['--py36-plus']
+
+  - repo: https://github.com/PyCQA/doc8
+    rev: 0.8.1rc3
+    hooks:
+      - id: doc8
+        args: ['--config', 'setup.cfg']
+        files: \.rst$
+
+  - repo: local
+    hooks:
+      - id: autoflake
+        name: autoflake
+        entry: autoflake
+        require_serial: true
+        language: system
+        types: [python]
+        args: ['--in-place', '--remove-unused-variables', '--remove-all-unused-imports']
+
+      - id: isort
+        name: isort
+        entry: isort
+        require_serial: true
+        language: system
+        types: [python]
+
+      - id: black
+        name: black
+        entry: black
+        require_serial: true
+        language: system
+        types: [python]
+
+      - id: mypy
+        name: mypy
+        entry: mypy
+        language: system
+        types: [python]
+#        args: ["--ignore-missing-imports", "--scripts-are-modules"]
+        require_serial: true
+        files: '^bgmi.*\.py$'
