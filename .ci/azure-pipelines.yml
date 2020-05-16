@@ -40,3 +40,6 @@ stages:
   - stage: Test
     jobs:
       - template: ./jobs/unittest.yaml
+  - stage: Build
+    jobs:
+      - template: ./jobs/build-docs.yaml
