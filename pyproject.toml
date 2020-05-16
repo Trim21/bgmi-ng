@@ -31,7 +31,7 @@ stevedore = "1.32.0"
 [tool.poetry.dev-dependencies]
 # lint
 mypy = '0.770'
-pre-commit = { version = "^2.4.0", python = ">=3.7" }
+pre-commit = { version = "2.4.0", python = ">=3.7" }
 black = '19.10b0'
 # test
 pytest = "5.4.2"
