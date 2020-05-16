@@ -2,11 +2,8 @@
 name = "bgmi"
 version = "3.0.0a0"
 description = "BGmi is a cli tool for subscribed bangumi."
-keywords=['bangumi', 'bgmi', 'feed']
-authors = [
-    "RicterZ <ricterzheng@gmail.com>",
-    "Trim21 <i@trim21.me>"
-]
+keywords = ['bangumi', 'bgmi', 'feed']
+authors = ["RicterZ <ricterzheng@gmail.com>", "Trim21 <i@trim21.me>"]
 readme = 'readme.md'
 license = "MIT"
 repository = 'https://github.com/BGmi/BGmi'
@@ -23,24 +20,23 @@ classifiers = [
   'Programming Language :: Python :: 3.8',
   'Programming Language :: Python :: Implementation :: CPython',
 ]
-
 include = ["LICENSE", "readme.md"]
-packages = [
-    { include = "bgmi" },
-]
+packages = [{ include = "bgmi" }]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-
+# dependencies
 stevedore = "1.32.0"
 
-
 [tool.poetry.dev-dependencies]
-autoflake = "1.3.1"
-mypy = '0.750'
-pre-commit = "2.1.0"
-isort = "4.3.21"
+mypy = '0.770'
+pre-commit = { version = "^2.4.0", python = ">=3.7" }
 black = '19.10b0'
+blacken-docs = { version = "^1.7.0", python = ">=3.7" }
+flake8 = "3.8.1"
+flake8-commas = "2.0.0"
+flake8-comprehensions = "3.2.2"
+flake8-mutable = "1.2.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
