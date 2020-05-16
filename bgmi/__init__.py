@@ -2,9 +2,9 @@
 
 `Project Home <https://github.com/BGmi/BGmi>`_
 """
+import os.path
 
-from pkg_resources import get_distribution
+from importlib_metadata import version
 
-__author__ = "RicterZ"
-__email__ = "ricterzheng@gmail.com"
-__version__ = get_distribution(__name__).version
+__version__ = version(__package__)
+source_root = os.path.dirname(__file__)

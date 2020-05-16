@@ -10,7 +10,7 @@ parameters:
   - name: matrix
     type: object
     default:
-      images: ["windows-latest", "ubuntu-latest", "macos-latest"]
+      images: ["ubuntu-latest", "macos-latest", "windows-latest"]
       pythonVersions: ["3.6", "3.7", "3.8"]
 
 jobs:
