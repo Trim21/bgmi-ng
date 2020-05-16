@@ -6,6 +6,7 @@
     ":semanticCommitTypeAll(chore)"
   ],
   "baseBranches": [
+    "master",
     "dev"
   ],
   "assignees": [
@@ -47,6 +48,18 @@
         "dev-dependencies"
       ],
       "semanticCommitScope": "deps-dev"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "^\\.ci/azure-pipelines\\.yml$"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: versioning=(?<versioning>[a-z-]+?))?\n\\s+name: ?(?<depName>.+?)\n\\s+ref: refs/tags/(?<currentValue>.+?)\n"
+      ],
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+      "depNameTemplate": "https://github.com/{{depName}}.git"
     }
   ]
 }

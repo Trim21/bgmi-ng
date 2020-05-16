@@ -1,0 +1,19 @@
+jobs:
+  - template: /.ci/templates/job.yaml
+    parameters:
+      name: Test
+      steps:
+        - script: pytest --cov=. --cov-report=xml --junitxml tmp/junit/test_report.xml
+          displayName: Unittest
+
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testResultsFiles: "tmp/junit/test_*.xml"
+            testRunTitle: "Publish test results for Python $(python.version)"
+
+        - task: PublishCodeCoverageResults@1
+          inputs:
+            codeCoverageTool: cobertura
+            summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage.xml"
+            failIfCoverageEmpty: true
