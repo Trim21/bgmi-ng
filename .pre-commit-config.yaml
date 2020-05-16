@@ -31,7 +31,7 @@ repos:
         args: ["--py36-plus"]
 
   - repo: https://github.com/PyCQA/doc8
-    rev: 0.8.1rc3
+    rev: 0.8.1rc3 # versioning=pep440
     hooks:
       - id: doc8
         args: ["--max-line-length", "88", "-v"]
@@ -69,6 +69,21 @@ repos:
     rev: v0.0.2
     hooks:
       - id: poetry-check-lock
+        additional_dependencies:
+          # renovate: pypi versioning=pep440
+          - poetry==1.0.5
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 3.8.1
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          # renovate: pypi versioning=pep440
+          - flake8-commas==2.0.0
+          # renovate: pypi versioning=pep440
+          - flake8-comprehensions==3.2.2
+          # renovate: pypi versioning=pep440
+          - flake8-mutable==1.2.0
 
   - repo: local
     hooks:
@@ -94,10 +109,3 @@ repos:
         args: ["--ignore-missing-imports"]
         require_serial: true
         exclude: '^.*[\\/](test_[^\\/]*)\.py$' # exclude file name starts with 'test_'
-
-      - id: flake8
-        name: flake8
-        entry: flake8
-        language: system
-        require_serial: false
-        types: [python]
