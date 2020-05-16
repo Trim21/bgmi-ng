@@ -10,7 +10,7 @@ from bgmi.protocol import output
 
 class MyOutput(output.Base):
     @classmethod
-    def require(cls) -> None:  # pragma: no cover
+    def require(cls) -> None:
         pass
 
     def __init__(self, config: dict) -> None:
@@ -18,7 +18,7 @@ class MyOutput(output.Base):
 
     def execute(
         self, subscription: "Subscription", torrent: str, save_path: str
-    ) -> None:  # pragma: no cover
+    ) -> None:
         if not torrent.startswith("http"):
             return
         try:

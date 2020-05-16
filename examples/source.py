@@ -10,7 +10,7 @@ class MySource(source.Base):
 
     def fetch_series_and_subtitle_group(
         self,
-    ) -> Tuple[List[source.Series], List[source.Subtitle]]:  # pragma: no cover
+    ) -> Tuple[List[source.Series], List[source.Subtitle]]:
         return (
             [
                 bgmi.protocol.source.Series.parse_obj(
@@ -39,7 +39,7 @@ class MySource(source.Base):
 
     def fetch_episode_of_series(
         self, series_id: str, max_page: int, subtitle_list: List[str] = None
-    ) -> List[source.Episode]:  # pragma: no cover
+    ) -> List[source.Episode]:
         return [
             source.Episode.parse_obj(
                 {
@@ -62,7 +62,7 @@ class MySource(source.Base):
 
     def search_by_keyword(
         self, keyword: str, max_page: int = None
-    ) -> List[source.Episode]:  # pragma: no cover
+    ) -> List[source.Episode]:
         return [
             source.Episode.parse_obj(
                 {
