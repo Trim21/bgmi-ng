@@ -12,5 +12,8 @@ jobs:
             testResultsFiles: "tmp/junit/test_*.xml"
             testRunTitle: "Publish test results for Python $(python.version)"
 
-        - bash: bash <(curl -s https://codecov.io/bash)
-          displayName: Codecov
+        - task: PublishCodeCoverageResults@1
+          inputs:
+            codeCoverageTool: cobertura
+            summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage.xml"
+            failIfCoverageEmpty: true
