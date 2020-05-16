@@ -1,0 +1,4 @@
+ignore:
+  - "examples"  # tested, but exclude from coverage report
+  - "tests"       # wildcards accepted
+  - "docs"       # wildcards accepted
