@@ -3,7 +3,7 @@ jobs:
     parameters:
       name: Test
       steps:
-        - script: pytest --cov=. --cov-report=xml --junitxml tmp/junit/test_report.xml
+        - script: pytest --cov=bgmi --cov-report=xml --junitxml tmp/junit/test_report.xml
           displayName: Unittest
 
         - task: PublishTestResults@2
