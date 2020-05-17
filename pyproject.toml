@@ -8,21 +8,27 @@ readme = 'readme.md'
 license = "MIT"
 repository = 'https://github.com/BGmi/BGmi'
 homepage = 'https://github.com/BGmi/BGmi'
+documentation = "https://bgmi-ng.readthedocs.io/"
 classifiers = [
   'Development Status :: 1 - Planning',
-  'Intended Audience :: Other Audience',
+  'Intended Audience :: End Users/Desktop',
   'Natural Language :: Chinese (Simplified)',
   'License :: OSI Approved :: MIT License',
-  'Operating System :: MacOS',
+  'Operating System :: MacOS :: MacOS X',
   'Operating System :: POSIX :: Linux',
   'Operating System :: Microsoft :: Windows',
+  'Environment :: Console',
+  'Topic :: Multimedia :: Video',
   'Programming Language :: Python',
   'Programming Language :: Python :: 3',
+  'Programming Language :: Python :: 3 :: Only',
   'Programming Language :: Python :: 3.6',
   'Programming Language :: Python :: 3.7',
   'Programming Language :: Python :: 3.8',
-  'Programming Language :: Python :: Implementation :: CPython',
+  'Programming Language :: Python :: 3.9',
   'Programming Language :: Python :: Implementation :: PyPy',
+  'Programming Language :: Python :: Implementation :: CPython',
+  'Typing :: Typed',
 ]
 include = ["LICENSE", "readme.md"]
 packages = [{ include = "bgmi" }]
