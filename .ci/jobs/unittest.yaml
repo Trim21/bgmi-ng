@@ -6,14 +6,16 @@ jobs:
         - script: pytest --cov=bgmi --cov-report=xml --junitxml tmp/junit/test_report.xml
           displayName: Unittest
 
+        - bash: |
+            export BUILD_SOURCEBRANCHNAME=${BRANCH#"refs/heads/"} # fix azure branch source name
+            bash <(curl -s https://codecov.io/bash) -Z -f coverage.xml -F "py_${PYV/./}" -F os_${OS%"-latest"}
+          name: Codecov
+          env:
+            PYV: $(python_version)
+            BRANCH: $(Build.SourceBranch)
+
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
             testResultsFiles: "tmp/junit/test_*.xml"
             testRunTitle: "Publish test results for Python $(python.version)"
-
-        - task: PublishCodeCoverageResults@1
-          inputs:
-            codeCoverageTool: cobertura
-            summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage.xml"
-            failIfCoverageEmpty: true
