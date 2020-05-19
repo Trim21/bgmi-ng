@@ -8,7 +8,7 @@ jobs:
 
         - bash: |
             export BUILD_SOURCEBRANCHNAME=${BRANCH#"refs/heads/"} # fix azure branch source name
-            bash <(curl -s https://codecov.io/bash) -Z -f coverage.xml -F "py_${PYV/./}" -F os_${OS%"-latest"}
+            bash <(curl -s https://codecov.io/bash) -Z -f coverage.xml -F "py_${PYV/./}" -F os_${OS%"-latest"} -C $(Build.SourceVersion)
           name: Codecov
           env:
             PYV: $(python_version)
