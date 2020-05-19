@@ -3,7 +3,7 @@
     "@trim21",
     "@trim21:app",
     "@trim21:monthly",
-    ":semanticCommitTypeAll(chore)"
+    ":semanticCommitTypeAll(build)"
   ],
   "baseBranches": [
     "master"
