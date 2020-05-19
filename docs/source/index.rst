@@ -14,5 +14,6 @@ Welcome to BGmi's documentation!
 .. toctree::
     :maxdepth: 2
 
+    config
     source
     output

@@ -89,15 +89,13 @@ class Base(metaclass=abstract.Meta):
 
     @abstract.abstractmethod
     def fetch_episode_of_series(
-        self, series_id: str, max_page: int, subtitle_list: List[str] = None
+        self, series_id: str, subtitle_list: List[str] = None
     ) -> Iterable[Episode]:  # pragma: no cover
         """get all episode by series id
 
         :param series_id: series_id
         :param subtitle_list: list of subtitle group
         :type subtitle_list: list
-        :param max_page: how many page user want to crawl
-        :type max_page: int
         :return: list of episode
         """
         return []

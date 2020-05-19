@@ -6,7 +6,7 @@ import string
 import tempfile
 from typing import Dict, List
 
-from pydantic import BaseModel, BaseSettings, Extra
+from pydantic import BaseSettings, Extra
 
 
 class DownloadDelegateEnum(str, enum.Enum):
@@ -27,35 +27,25 @@ def gen_password(length: int) -> str:
     return "".join(secrets.choice(alphabet) for _ in range(length))
 
 
-class SourceConfig(BaseModel):
-    pass
-
-
 class WritableConfig(BaseSettings):
-    output: List[Dict[str, dict]] = []
-    max_page: int = 3
-    source: SourceConfig = {}  # type: ignore
+    output: Dict[str, dict] = {}
+    source: Dict[str, dict] = {}
+    strainer: Dict[str, dict] = {"keywords weight": {"1080": 10, "720": 5}}
+    backend: dict = {}
     disabled_source: List[str] = []
-    filters: Dict[str, dict] = {}
     # enable global filter
 
     # Global blocked keyword
-    global_keyword_filter: List[str] = [
-        "Leopard-Raws",
-        "hevc",
-        "x265",
-        "c-a Raws",
-        "U3-Web",
-    ]
-    enable_global_filter: bool = True
+    # global_keyword_filter: List[str] = [
+    #     "Leopard-Raws",
+    #     "hevc",
+    #     "x265",
+    #     "c-a Raws",
+    #     "U3-Web",
+    # ]
+    # enable_global_filter: bool = True
 
     # use tornado serving video files
-    # KEYWORDS_WEIGHT: Dict[str, int] = Field(
-    #     {}, alias="keyword weight", env="keyword weight",
-    # )
-
-    tornado_serve_static_files: bool = False
-    admin_token: str = gen_password(16)
 
     logger: dict = {}  #: will be parsed by ``logging.config.dictConfig``
 
@@ -92,3 +82,17 @@ class Config(WritableConfig):
     @property
     def tmp_path(self) -> str:
         return os.path.join(self.bgmi_path, "tmp")
+
+
+if __name__ == "__main__":
+    import toml
+
+    print(
+        os.path.normpath(
+            os.path.join(os.path.dirname(__file__), "..", "examples", "config.toml")
+        )
+    )
+    with open(
+        os.path.join(os.path.dirname(__file__), "../..", "examples", "config.toml")
+    ) as f:
+        print(toml.load(f))

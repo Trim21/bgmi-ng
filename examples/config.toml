@@ -1,0 +1,26 @@
+[bgmi]
+
+[bgmi.output]
+
+[bgmi.output.aria2]
+url = "http://127.0.0.1:6800/rpc"
+secret = "token:233"
+
+[bgmi.output.notify]
+
+[bgmi.output.notify.smtp]
+from = "bgmi@trim21.me"
+to = "notify@trim21.me"
+host = "smtp.example.com"
+port = 25
+password = 2333
+tls = true
+
+[bgmi.source]
+hello = { a = 233 } # this will enable plugin `hello` with options {'a': 233}
+
+# this will enable plugin `world` with empty options
+[bgmi.source.world]
+
+[bgmi.source.dmhy]
+mirror = 'https://my.mirror.domain'

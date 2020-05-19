@@ -139,9 +139,7 @@ class BGmi:
         episodes: List[source.Episode] = []
         for ser in subscription.series:
             try:
-                for episode in ser.driver.fetch_episode_of_series(
-                    ser.id, self.config.max_page,
-                ):
+                for episode in ser.driver.fetch_episode_of_series(ser.id):
                     episodes.append(
                         table.Episode(
                             title=episode.title,

@@ -73,7 +73,7 @@ repos:
     rev: 3.8.1
     hooks:
       - id: flake8
-        args: ["--max-line-length=89", "--ignore=C812"]
+        args: ["--max-line-length=89", "--ignore=C812,C813"]
         additional_dependencies:
           # renovate: pypi versioning=pep440
           - flake8-commas==2.0.0
