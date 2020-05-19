@@ -104,7 +104,7 @@ repos:
         entry: mypy
         language: system
         types: [python]
-        args: ["--ignore-missing-imports"]
+        args: ["--ignore-missing-imports", "--no-incremental"]
         require_serial: true
         exclude: '^.*[\\/](test_[^\\/]*)\.py$' # exclude file name starts with 'test_'
 

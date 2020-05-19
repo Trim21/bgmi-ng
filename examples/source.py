@@ -38,7 +38,7 @@ class MySource(source.Base):
         )
 
     def fetch_episode_of_series(
-        self, series_id: str, max_page: int, subtitle_list: List[str] = None
+        self, series_id: str, subtitle_list: List[str] = None
     ) -> List[source.Episode]:
         return [
             source.Episode.parse_obj(
