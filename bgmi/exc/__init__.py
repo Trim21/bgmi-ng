@@ -36,3 +36,7 @@ class ConnectError(BGmiConnectionException):
 
 class AuthError(BGmiException):
     """exception when output require correct auth"""
+
+
+class ConfigNotValid(BGmiException):
+    """exception when config is not valid"""

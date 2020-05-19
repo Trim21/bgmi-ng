@@ -1,35 +1,67 @@
 import os
 import sqlite3
 import typing
+from contextlib import contextmanager
+from os import path
 
 import sqlalchemy as sa
 import sqlalchemy.exc
+from alembic import command
+from alembic.config import Config
+from pydantic import BaseSettings, ValidationError
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
 import bgmi.core
 from bgmi import db
 from bgmi.db import table
+from bgmi.exc import ConfigNotValid, SeriesNotFollowed
 from bgmi.protocol import backend
 
 
-class SQLiteBackend(backend.Base):
-    version = "init"
+class SqliteConfig(BaseSettings):
+    db_path: str = os.path.expanduser("~/.bgmi/app.db")
 
-    @classmethod
-    def create_engine(cls) -> sa.engine.base.Engine:
-        return create_engine("sqlite:///" + os.path.expanduser("./tmp/test.db"))
+
+class SQLiteBackend(backend.Base):
+    version = "0.0.1"
+    cfg: SqliteConfig
+
+    def create_engine(self) -> sa.engine.base.Engine:
+        return create_engine("sqlite:///" + self.cfg.db_path)
+
+    @staticmethod
+    def parse_config(config: dict) -> SqliteConfig:
+        try:
+            return SqliteConfig.parse_obj(config)
+        except ValidationError as e:
+            raise ConfigNotValid() from e
 
     @classmethod
     def install(cls, config: dict) -> None:
-        engine = cls.create_engine()
-        db.Base.metadata.create_all(engine)
+        cfg = cls.parse_config(config)
+        alembic_config = Config(path.join(path.dirname(__file__), "alembic.ini"))
+        alembic_config.set_main_option("sqlalchemy.url", "sqlite:///" + cfg.db_path)
+        command.upgrade(alembic_config, "head")
 
-    def __init__(self) -> None:
+    def __init__(self, config: dict) -> None:
+        super().__init__(config)
+        self.cfg = self.parse_config(config)
         self.Session = sessionmaker(self.create_engine())
 
-    def add_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    @contextmanager
+    def get_session(self) -> Session:
+        session = self.Session()
+        try:
+            yield session
+            session.commit()
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
+    def add_subscription(self, sub: "bgmi.core.Subscription") -> None:
         session = self.Session()
         session.add(
             db.table.Subscription(
@@ -57,20 +89,21 @@ class SQLiteBackend(backend.Base):
                 raise
 
     def remove_subscription(self, sub: "bgmi.core.Subscription") -> None:
-        session = self.Session()
-        session.execute(
-            sa.delete(table.Subscription, table.Subscription.name == sub.name)
-        )
-        session.commit()
+        with self.get_session() as session:
+            session.execute(
+                sa.delete(table.Subscription, table.Subscription.name == sub.name)
+            )
 
     def get_subscription(self, sub_name: str) -> "bgmi.core.Subscription":
-        session = self.Session()
-        row: table.Subscription = session.query(table.Subscription).filter_by(
-            name=sub_name
-        ).first()
-        series = session.query(table.Series).filter_by(sub_name=sub_name)
-        data = row.dict()
-        data["series"] = [x.dict() for x in series]
+        with self.get_session() as session:
+            row: table.Subscription = session.query(table.Subscription).filter_by(
+                name=sub_name
+            ).first()
+            series: typing.List[table.Series] = session.query(table.Series).filter_by(
+                sub_name=sub_name
+            ).all()
+            data = row.dict()
+            data["series"] = [x.to_core_obj() for x in series]
         return bgmi.core.Subscription(**data)
 
     def save_subscription(self, sub: "bgmi.core.Subscription") -> None:
@@ -79,16 +112,19 @@ class SQLiteBackend(backend.Base):
     def get_all_subscription(
         self, filters: typing.Dict[str, typing.Any] = None
     ) -> typing.List["bgmi.core.Subscription"]:
-        session = self.Session()
-        subscriptions: typing.Dict[str, bgmi.core.Subscription] = {
-            x.name: bgmi.core.Subscription(**x.dict())
-            for x in session.query(table.Subscription).filter_by(**filters)
-        }
+        if filters is None:
+            filters = {}
 
-        for x in session.query(table.Series).filter(
-            table.Series.sub_name.in_([x.name for x in subscriptions.values()])
-        ):
-            subscriptions[x.sub_name].series.append(bgmi.core.Series(**x.dict()))
+        with self.get_session() as session:
+            subscriptions: typing.Dict[str, bgmi.core.Subscription] = {
+                x.name: bgmi.core.Subscription(**x.dict())
+                for x in session.query(table.Subscription).filter_by(**filters)
+            }
+
+            for x in session.query(table.Series).filter(
+                table.Series.sub_name.in_([x.name for x in subscriptions.values()])
+            ):
+                subscriptions[x.sub_name].series.append(x.to_core_obj())
 
         return list(subscriptions.values())
 
@@ -98,3 +134,18 @@ class SQLiteBackend(backend.Base):
         :param source_id: source id
         :param name: series name
         """
+        with self.get_session() as session:
+            s: typing.Optional[table.Series] = (
+                session.query(table.Series)
+                .filter(table.Series.source == source_id, table.Series.name == name)
+                .first()
+            )
+            if s is None:
+                raise SeriesNotFollowed(
+                    f"can't find series {name} in source {source_id}"
+                )
+            return s.to_core_obj()
+
+
+if __name__ == "__main__":
+    SQLiteBackend.install({"db_path": os.path.expanduser("./tmp/test.db")})

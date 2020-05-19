@@ -44,11 +44,5 @@ class Meta(_ABCMeta):
             )
         return cls
 
-    def __call__(self, *args: Any, **kwargs: Any) -> Any:
-        try:
-            return _ABCMeta.__call__(self, *args, **kwargs)
-        except TypeError as e:
-            raise NotImplementedError from e
-
 
 __all__ = ["abstract_class_attribute", "abstractmethod", "Meta"]

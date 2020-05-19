@@ -4,6 +4,8 @@ from sqlalchemy import Boolean, Column, Date, Integer, String
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.sql import expression
 
+from bgmi.core.series import Series as CoreSeries
+
 T = TypeVar("T", bound=DeclarativeMeta)
 
 
@@ -34,11 +36,21 @@ class Subscription(Base, ORMMixin):
 class Series(Base, ORMMixin):
     __tablename__ = "series"
 
-    name = Column(String(255), primary_key=True, index=True, nullable=False)
+    id = Column(String(255), primary_key=True)
+    name = Column(String(255), index=True, nullable=False)
     source = Column(String(40), primary_key=True, nullable=False, index=True)
     episode = Column(Integer, nullable=False, server_default="0")
     start = Column(Integer, nullable=False, server_default="0")
     sub_name = Column(String(50), index=True, nullable=False, server_default="")
+
+    def to_core_obj(self) -> CoreSeries:
+        return CoreSeries(
+            id=self.id,
+            name=self.name,
+            source=self.source,
+            latest_episode=self.episode,
+            first_episode=self.start,
+        )
 
 
 class Episode(Base, ORMMixin):

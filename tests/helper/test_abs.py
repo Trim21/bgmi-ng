@@ -37,7 +37,7 @@ def test_method_should_raise_when_inst():
     class B(BaseWithMethod):
         pass
 
-    with pytest.raises(NotImplementedError):
+    with pytest.raises(TypeError):
         B()
 
 

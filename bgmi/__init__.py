@@ -6,5 +6,9 @@ import os.path
 
 from importlib_metadata import version
 
+from bgmi import core
+
 __version__ = version(__package__)
 source_root = os.path.dirname(__file__)
+
+__all__ = ["__version__", "core"]

@@ -14,6 +14,10 @@ class Base(metaclass=abstract.Meta):
 
     #: class attribute for attribute version
     version: str = abstract.abstract_class_attribute()
+    _raw_config: dict
+
+    def __init__(self, config: dict):
+        self._raw_config = config
 
     @classmethod
     @abc.abstractmethod
