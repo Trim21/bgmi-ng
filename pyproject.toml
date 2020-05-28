@@ -30,7 +30,6 @@ classifiers = [
   'Programming Language :: Python :: Implementation :: CPython',
   'Typing :: Typed',
 ]
-include = ["LICENSE", "readme.md"]
 packages = [{ include = "bgmi" }]
 
 [tool.poetry.dependencies]
