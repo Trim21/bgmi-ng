@@ -70,6 +70,11 @@ pytest-rerunfailures = "9.0"
 pytest-mock = "3.1.0"
 coverage = '5.1'
 requests = "2.23.0"
+flake8 = "3.8.2"
+flake8-commas = "2.0.0"
+flake8-comprehensions = "3.2.3"
+flake8-mutable = "1.2.0"
+blacken-docs = {version = "1.7.0", python = ">=3.7"}
 
 [build-system]
 requires = ["poetry>=0.12"]
