@@ -67,7 +67,7 @@ repos:
       - id: poetry-check-lock
         additional_dependencies:
           # renovate: pypi versioning=pep440
-          - poetry==1.0.5
+          - poetry==1.0.8
 
   - repo: https://github.com/PyCQA/flake8
     rev: 3.8.1
@@ -78,7 +78,7 @@ repos:
           # renovate: pypi versioning=pep440
           - flake8-commas==2.0.0
           # renovate: pypi versioning=pep440
-          - flake8-comprehensions==3.2.2
+          - flake8-comprehensions==3.2.3
           # renovate: pypi versioning=pep440
           - flake8-mutable==1.2.0
 
