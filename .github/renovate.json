@@ -2,56 +2,12 @@
   "extends": [
     "@trim21",
     "@trim21:app",
+    "@trim21:poetry",
     "@trim21:monthly",
     ":semanticCommitTypeAll(build)"
   ],
   "baseBranches": [
     "master"
   ],
-  "pip_setup": {
-    "enabled": false
-  },
-  "pip_requirements": {
-    "enabled": false
-  },
-  "pipenv": {
-    "enabled": false
-  },
-  "semanticCommits": true,
-  "packageRules": [
-    {
-      "groupName": "deps-build",
-      "managers": [
-        "dockerfile"
-      ],
-      "versionScheme": "pep440",
-      "semanticCommitScope": "deps-build"
-    },
-    {
-      "groupName": "deps-prod",
-      "depTypeList": [
-        "dependencies"
-      ],
-      "semanticCommitScope": "deps"
-    },
-    {
-      "groupName": "deps-dev",
-      "depTypeList": [
-        "dev-dependencies"
-      ],
-      "semanticCommitScope": "deps-dev"
-    }
-  ],
-  "regexManagers": [
-    {
-      "fileMatch": [
-        "^\\.ci/azure-pipelines\\.yml$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?)(?: versioning=(?<versioning>[a-z-]+?))?\n\\s+name: ?(?<depName>.+?)\n\\s+ref: refs/tags/(?<currentValue>.+?)\n"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
-      "lookupNameTemplate": "https://github.com/{{depName}}.git"
-    }
-  ]
+  "semanticCommits": true
 }
