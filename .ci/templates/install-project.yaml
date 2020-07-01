@@ -1,8 +1,8 @@
 parameters:
-  python_version: "3.7" # defaults for any parameters that aren't specified
+  python_version: '3.7'  # defaults for any parameters that aren't specified
 
 steps:
   - template: python/install-poetry-project.yaml@trim21
     parameters:
       python_version: ${{ parameters.python_version }}
-      extras: [ docs ]
+      extras: [docs]

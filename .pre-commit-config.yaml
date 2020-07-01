@@ -1,10 +1,15 @@
 repos:
+  - repo: https://github.com/Trim21/pre-commit-hooks
+    rev: c37e29c1e823c5ce25cac879a0aa7fd63d387c25  # frozen: v0.0.1
+    hooks:
+      - id: yamlfmt
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v3.0.0
     hooks:
       - id: check-ast
       - id: check-merge-conflict
-        exclude: '\.rst$'
+        exclude: \.rst$
 
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -12,7 +17,7 @@ repos:
       - id: mixed-line-ending
         args: [--fix=lf]
       - id: check-json
-      # check for file bigger than 500kb
+# check for file bigger than 500kb
       - id: check-added-large-files
       - id: check-yaml
       - id: debug-statements
@@ -28,38 +33,30 @@ repos:
     rev: v2.4.1
     hooks:
       - id: pyupgrade
-        args: ["--py36-plus"]
+        args: [--py36-plus]
 
   - repo: https://github.com/PyCQA/doc8
     rev: 0.8.1rc3
     hooks:
       - id: doc8
-        args: ["--max-line-length", "88", "-v"]
+        args: [--max-line-length, '88', -v]
         files: \.rst$
-        exclude: '.*/_autoapi/.*\.rst$'
+        exclude: .*/_autoapi/.*\.rst$
 
   - repo: https://github.com/Trim21/mirrors-autoflake
     rev: v1.3.1
     hooks:
       - id: autoflake
         require_serial: true
-        args:
-          ["--in-place", "--remove-unused-variables", "--expand-star-imports"]
+        args: [--in-place, --remove-unused-variables, --expand-star-imports]
 
   - repo: https://github.com/timothycrosley/isort
     rev: 4.3.21-2
     hooks:
       - id: isort
         require_serial: true
-        files: '.*\.py$'
-        args:
-          [
-            "--line-width=88",
-            "--trailing-comma",
-            "--multi-line=3",
-            "--project=bgmi",
-            "--section-default=THIRDPARTY",
-          ]
+        files: .*\.py$
+        args: [--line-width=88, --trailing-comma, --multi-line=3, --project=bgmi, --section-default=THIRDPARTY]
 
   - repo: https://github.com/Trim21/poetry-check-lock
     rev: v0.0.3
@@ -80,16 +77,16 @@ repos:
         entry: mypy
         language: system
         types: [python]
-        args: ["--ignore-missing-imports"]
+        args: [--ignore-missing-imports]
         require_serial: true
-        exclude: '^.*[\\/](test_[^\\/]*)\.py$' # exclude file name starts with 'test_'
+        exclude: ^.*[\\/](test_[^\\/]*)\.py$  # exclude file name starts with 'test_'
 
       - id: flake8
         name: flake8
         entry: flake8
         language: system
         types: [python]
-        args: ["--max-line-length=89", "--ignore=C812"]
+        args: [--max-line-length=89, --ignore=C812]
 
       - id: poetry
         name: poetry
@@ -97,10 +94,10 @@ repos:
         language: system
         pass_filenames: false
         require_serial: false
-        files: "pyproject.toml"
+        files: pyproject.toml
 
       - id: blacken-docs
         name: blacken-docs
         entry: blacken-docs
         language: system
-        files: '\.(rst|md|markdown|py|tex)$'
+        files: \.(rst|md|markdown|py|tex)$

@@ -2,21 +2,21 @@
 trigger:
   branches:
     include:
-      - "*"
+      - '*'
     exclude:
-      - "renovate/*"
+      - renovate/*
   paths:
     include:
-      - "*"
+      - '*'
     exclude:
-      - ".github/*"
-      - "README.rst"
-      - ".readthedocs.yml"
-      - ".gitignore"
-      - ".editorconfig"
+      - .github/*
+      - README.rst
+      - .readthedocs.yml
+      - .gitignore
+      - .editorconfig
 
 schedules:
-  - cron: "0 12 * * 6"
+  - cron: 0 12 * * 6
     displayName: Weekly Saturday build
     branches:
       include:
@@ -29,7 +29,7 @@ resources:
     - repository: trim21
       type: github
       endpoint: github
-      # renovate: datasource=git-tags versioning=semver
+# renovate: datasource=git-tags versioning=semver
       name: Trim21/azure-pipeline-templates
       ref: refs/tags/v0.0.7
 

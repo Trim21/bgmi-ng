@@ -17,5 +17,5 @@ jobs:
         - task: PublishTestResults@2
           condition: succeededOrFailed()
           inputs:
-            testResultsFiles: "tmp/junit/test_*.xml"
-            testRunTitle: "Publish test results for Python $(python.version)"
+            testResultsFiles: tmp/junit/test_*.xml
+            testRunTitle: Publish test results for Python $(python.version)

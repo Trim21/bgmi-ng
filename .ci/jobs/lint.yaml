@@ -1,14 +1,14 @@
 jobs:
-  - job: "Lint"
+  - job: Lint
     pool:
-      vmImage: "ubuntu-latest"
+      vmImage: ubuntu-latest
 
     strategy:
       matrix:
         Python37:
-          python.version: "3.7"
+          python.version: '3.7'
         Python38:
-          python.version: "3.8"
+          python.version: '3.8'
 
     steps:
       - template: /.ci/templates/install-project.yaml
