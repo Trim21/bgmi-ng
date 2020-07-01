@@ -27,3 +27,4 @@ codealike.json
 node_modules
 junit
 package-lock.json
+.venv
