@@ -47,7 +47,7 @@ repos:
           ["--in-place", "--remove-unused-variables", "--expand-star-imports"]
 
   - repo: https://github.com/timothycrosley/isort
-    rev: 4.3.21-2
+    rev: 5.7.0
     hooks:
       - id: isort
         require_serial: true
