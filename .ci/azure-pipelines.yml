@@ -31,7 +31,7 @@ resources:
       endpoint: github
       # renovate: datasource=git-tags versioning=semver
       name: Trim21/azure-pipeline-templates
-      ref: refs/tags/v0.0.7
+      ref: refs/tags/v0.2.0
 
 stages:
   - stage: Lint
