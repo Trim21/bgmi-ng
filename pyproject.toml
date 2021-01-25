@@ -65,7 +65,7 @@ mypy = '==0.782'
 pre-commit = { version = "==2.5.1", python = ">=3.7" }
 black = '19.10b0'
 # test
-pytest = "==5.4.3"
+pytest = "==6.2.2"
 pytest-rerunfailures = "9.0"
 pytest-mock = "==3.1.1"
 coverage = '5.1'
