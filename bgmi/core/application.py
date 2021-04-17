@@ -140,7 +140,8 @@ class BGmi:
         for ser in subscription.series:
             try:
                 for episode in ser.driver.fetch_episode_of_series(
-                    ser.id, self.config.max_page,
+                    ser.id,
+                    self.config.max_page,
                 ):
                     episodes.append(
                         table.Episode(

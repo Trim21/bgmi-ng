@@ -1,0 +1,30 @@
+name: docs
+
+on:
+  push:
+    branches-ignore:
+      - renovate/**
+      - deepsource-fix-*
+
+  pull_request: {}
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  sphinx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - run: make -C docs html

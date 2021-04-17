@@ -1,0 +1,39 @@
+name: unittest
+
+on:
+  push:
+    branches-ignore:
+      - renovate/**
+      - deepsource-fix-*
+
+  pull_request: {}
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  unittest:
+    strategy:
+      matrix:
+        python: ['3.6', '3.7', '3.8', '3.9', pypy3]
+        os: [ubuntu, macos, windows]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+
+      - name: Pytest
+        run: coverage run --source=bgmi -m pytest
+
+      - name: Codecov
+        run: |
+          bash <(curl -s https://codecov.io/bash) -Z -F "py_${PYV/./}" -F "os_${{ matrix.os }}"
+        env:
+          PYV: ${{ matrix.python }}

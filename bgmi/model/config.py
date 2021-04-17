@@ -4,14 +4,14 @@ import platform
 import secrets
 import string
 import tempfile
-from typing import Dict, List
+from typing import Dict, List, cast
 
 from pydantic import BaseModel, BaseSettings, Extra
 
 
 class DownloadDelegateEnum(str, enum.Enum):
     def __str__(self) -> str:
-        return self.value
+        return cast(str, self.value)
 
 
 def get_bgmi_path() -> str:

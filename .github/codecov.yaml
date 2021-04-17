@@ -1,5 +1,5 @@
 ignore:
-  - "examples" # tested, but exclude from coverage report
-  - "tests" # wildcards accepted
-  - "docs" # wildcards accepted
-  - "bgmi/backend/migrations/env.py"
+  - examples  # tested, but exclude from coverage report
+  - tests  # wildcards accepted
+  - docs  # wildcards accepted
+  - bgmi/backend/migrations/env.py

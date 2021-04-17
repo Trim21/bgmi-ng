@@ -19,9 +19,12 @@ class Series:
 
     @property
     def driver(self) -> "protocol.source.Base":
-        return stevedore.DriverManager(
-            namespace.SOURCE, self.source, invoke_on_load=True
-        ).driver
+        return typing.cast(
+            protocol.source.Base,
+            stevedore.DriverManager(
+                namespace.SOURCE, self.source, invoke_on_load=True
+            ).driver,
+        )
 
     @property
     def episode(self) -> int:

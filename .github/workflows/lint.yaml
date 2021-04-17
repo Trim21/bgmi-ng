@@ -1,0 +1,75 @@
+name: lint
+
+on:
+  push:
+    branches-ignore:
+      - renovate/**
+      - deepsource-fix-*
+  pull_request: {}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+
+      - run: echo "::add-matcher::.github/workflows/matcher/flake8.json"
+
+      - run: flake8
+
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - uses: liskin/gh-problem-matcher-wrap@v1
+        with:
+          action: add
+          linters: mypy
+
+      - name: mypy
+        run: mypy --show-column-numbers bgmi
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.cache/pre-commit
+          key: precommit-2-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: precommit-2-${{ env.PY }}-
+
+      - name: pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure && pre-commit gc
