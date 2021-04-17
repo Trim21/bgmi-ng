@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, Column, Date, Integer, String
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.sql import expression
 
-from bgmi.core.series import Series as CoreSeries
+from bgmi3.core.series import Series as CoreSeries
 
 T = TypeVar("T", bound=DeclarativeMeta)
 
@@ -81,6 +81,6 @@ if __name__ == "__main__":
 
     from sqlalchemy import create_engine
 
-    print(os.path.expanduser("~/.bgmi/app.db"))
-    engine = create_engine("sqlite:///" + os.path.expanduser("~/.bgmi/app.db"))
+    print(os.path.expanduser("~/.bgmi3/app.db"))
+    engine = create_engine("sqlite:///" + os.path.expanduser("~/.bgmi3/app.db"))
     Base.metadata.create_all(engine)

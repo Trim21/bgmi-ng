@@ -3,10 +3,10 @@
 """
 from typing import TYPE_CHECKING
 
-from bgmi.helper import abstract
+from bgmi3.helper import abstract
 
 if TYPE_CHECKING:
-    from bgmi.core import Subscription
+    from bgmi3.core import Subscription
 
 
 class Base(metaclass=abstract.Meta):

@@ -1,17 +1,17 @@
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
-name = "bgmi"
+name = "bgmi3"
 version = "0.0.1-alpha.0"
 description = "BGmi is a cli tool for subscribed bangumi."
 keywords = ['bangumi', 'bgmi', 'feed']
 authors = ["RicterZ <ricterzheng@gmail.com>", "Trim21 <i@trim21.me>"]
 readme = 'readme.md'
 license = "MIT"
-repository = 'https://github.com/BGmi/BGmi'
-homepage = 'https://github.com/BGmi/BGmi'
+repository = 'https://github.com/BGmi/BGmi-NG'
+homepage = 'https://github.com/BGmi/BGmi-NG'
 documentation = "https://bgmi-ng.readthedocs.io/"
 classifiers = [
   'Development Status :: 1 - Planning',
@@ -34,7 +34,7 @@ classifiers = [
   'Programming Language :: Python :: Implementation :: CPython',
   'Typing :: Typed',
 ]
-packages = [{ include = "bgmi" }]
+packages = [{ include = "bgmi3" }]
 
 [tool.poetry.dependencies]
 python = "^3.6.1"

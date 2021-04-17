@@ -2,8 +2,8 @@ from typing import List
 
 from pydantic import BaseModel
 
-from bgmi.model.bangumi_base import UpdateTime
-from bgmi.model.status import SeriesStatus
+from bgmi3.model.bangumi_base import UpdateTime
+from bgmi3.model.status import SeriesStatus
 
 
 class Series(BaseModel):

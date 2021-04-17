@@ -3,10 +3,10 @@ import typing
 
 import stevedore
 
-from bgmi.core import namespace
+from bgmi3.core import namespace
 
 if typing.TYPE_CHECKING:
-    from bgmi import protocol
+    from bgmi3 import protocol
 
 
 @dataclasses.dataclass

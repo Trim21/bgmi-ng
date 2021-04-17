@@ -30,7 +30,7 @@ jobs:
       - uses: Trim21/install-poetry-project@dist/v1
 
       - name: Pytest
-        run: coverage run --source=bgmi -m pytest
+        run: coverage run --source=bgmi3 -m pytest
 
       - name: Codecov
         run: |

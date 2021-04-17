@@ -7,13 +7,13 @@ from typing import List
 import stevedore
 import stevedore.extension
 
-from bgmi.core import namespace
-from bgmi.core.series import Series
-from bgmi.core.subscription import Subscription
-from bgmi.db import table
-from bgmi.exc import SeriesNotFollowed, SubscriptionNotFollowed
-from bgmi.model import Config
-from bgmi.protocol import backend, output, source
+from bgmi3.core import namespace
+from bgmi3.core.series import Series
+from bgmi3.core.subscription import Subscription
+from bgmi3.db import table
+from bgmi3.exc import SeriesNotFollowed, SubscriptionNotFollowed
+from bgmi3.model import Config
+from bgmi3.protocol import backend, output, source
 
 
 @dataclass
@@ -24,12 +24,12 @@ class BGmi:
 
     .. code-block:: python
 
-        bgmi = BGmi(config=Config())
+        bgmi3 = BGmi(config=Config())
         subscription_name = "超炮"
-        bgmi.create(subscription_name)
-        bgmi.add(sub_name=subscription_name, source="mikan", name="科学的超电磁炮T")
-        bgmi.remove(subscription_name, "mikan")
-        bgmi.delete(subscription_name)
+        bgmi3.create(subscription_name)
+        bgmi3.add(sub_name=subscription_name, source="mikan", name="科学的超电磁炮T")
+        bgmi3.remove(subscription_name, "mikan")
+        bgmi3.delete(subscription_name)
 
     """
 

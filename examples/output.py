@@ -3,9 +3,9 @@ import os.path
 
 import requests
 
-import bgmi.exc
-from bgmi.core import Subscription
-from bgmi.protocol import output
+import bgmi3.exc
+from bgmi3.core import Subscription
+from bgmi3.protocol import output
 
 
 class MyOutput(output.Base):
@@ -24,7 +24,7 @@ class MyOutput(output.Base):
         try:
             r = requests.get(torrent)
         except requests.ConnectionError as e:
-            raise bgmi.exc.ConnectError from e
+            raise bgmi3.exc.ConnectError from e
         filename = os.path.basename(torrent)
         with open(os.path.join(save_path, filename), "wb") as f:
             f.write(r.content)

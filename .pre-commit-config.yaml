@@ -49,7 +49,7 @@ repos:
           - --line-width=88
           - --trailing-comma
           - --multi-line=3
-          - --project=bgmi
+          - --project=bgmi3
           - --force-grid-wrap=0
           - --use-parentheses
           - -sd=THIRDPARTY

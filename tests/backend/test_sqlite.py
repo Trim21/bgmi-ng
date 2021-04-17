@@ -6,9 +6,9 @@ from unittest.mock import MagicMock
 import pytest
 from pytest_mock import MockFixture
 
-from bgmi.backend.sqlite import SQLiteBackend, SqliteConfig
-from bgmi.core import Subscription
-from bgmi.exc import ConfigNotValid, SeriesNotFollowed
+from bgmi3.backend.sqlite import SQLiteBackend, SqliteConfig
+from bgmi3.core import Subscription
+from bgmi3.exc import ConfigNotValid, SeriesNotFollowed
 
 
 @pytest.fixture()
@@ -99,7 +99,7 @@ def test_get_subscription_with_series(sqlite_backend: SQLiteBackend):
 
 
 def test_save_subscription(mocker: MockFixture, sqlite_db_config):
-    m: MagicMock = mocker.patch("bgmi.backend.sqlite.SQLiteBackend.add_subscription")
+    m: MagicMock = mocker.patch("bgmi3.backend.sqlite.SQLiteBackend.add_subscription")
     sub = Subscription(name="233")
     SQLiteBackend(sqlite_db_config).save_subscription(sub)
     m.assert_called_once_with(sub)

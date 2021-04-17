@@ -5,7 +5,7 @@ bgmi:
       secret: token:233
     notify:
       smtp:
-        from: bgmi@trim21.me
+        from: bgmi3@trim21.me
         to: notify@trim21.me
         host: smtp.example.com
         port: 25

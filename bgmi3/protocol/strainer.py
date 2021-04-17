@@ -3,11 +3,11 @@
 """
 from typing import TYPE_CHECKING, List
 
-from bgmi.helper import abstract
+from bgmi3.helper import abstract
 
 if TYPE_CHECKING:
-    from bgmi.core import Subscription
-    from bgmi.protocol import source
+    from bgmi3.core import Subscription
+    from bgmi3.protocol import source
 
 
 class Base(metaclass=abstract.Meta):

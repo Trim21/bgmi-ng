@@ -27,10 +27,10 @@ If applicable, add screenshots to help explain your problem.
 <!--
 run this in your bash:
 
-python -c 'import sys, bgmi, platform
+python -c 'import sys, bgmi3, platform
 print(f"OS: `{platform.platform()}`")
 print(f"python: `{sys.version}`")
-print(f"bgmi: `{bgmi.__version__}`")'
+print(f"bgmi3: `{bgmi3.__version__}`")'
 
 and copy result below:
 -->

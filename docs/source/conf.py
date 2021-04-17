@@ -39,16 +39,14 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.githubpages",
-    # "sphinxcontrib.httpdomain",
-    # "sphinxcontrib.httpexample",
-    # "sphinx_issues",
+    "sphinx_issues",
     "autoapi.extension",
     "sphinx.ext.napoleon",
     "sphinx_copybutton",
 ]
 
 # Github repo
-issues_github_path = "BGmi/BGmi"
+issues_github_path = "BGmi/BGmi-NG"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -84,7 +82,7 @@ html_show_sourcelink = True
 smart_quotes = True
 smartquotes = False
 
-autoapi_dirs = ["../../bgmi"]
+autoapi_dirs = ["../../bgmi3"]
 autoapi_python_use_implicit_namespaces = True
 autoapi_options = [
     "members",

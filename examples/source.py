@@ -1,7 +1,7 @@
 from typing import List, Tuple
 
-import bgmi.protocol.source
-from bgmi.protocol import source
+import bgmi3.protocol.source
+from bgmi3.protocol import source
 
 
 class MySource(source.Base):
@@ -13,7 +13,7 @@ class MySource(source.Base):
     ) -> Tuple[List[source.Series], List[source.Subtitle]]:
         return (
             [
-                bgmi.protocol.source.Series.parse_obj(
+                bgmi3.protocol.source.Series.parse_obj(
                     {
                         "id": "1",
                         "status": 0,
@@ -22,7 +22,7 @@ class MySource(source.Base):
                         "name": "ID:INVADED",
                     }
                 ),
-                bgmi.protocol.source.Series.parse_obj(
+                bgmi3.protocol.source.Series.parse_obj(
                     {
                         "id": "2",
                         "update_time": "Fri",

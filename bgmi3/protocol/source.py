@@ -4,8 +4,8 @@ from typing import Iterable, List, Optional, Tuple
 
 from pydantic import AnyHttpUrl, BaseModel
 
-from bgmi import model
-from bgmi.helper import abstract
+from bgmi3 import model
+from bgmi3.helper import abstract
 
 
 class Series(BaseModel):
@@ -48,7 +48,7 @@ class Base(metaclass=abstract.Meta):
         list of bangumi dict:
         update time should be one of
         ``['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']``
-        (:py:class:`bgmi.model.UpdateTime`)
+        (:py:class:`bgmi3.model.UpdateTime`)
 
         .. warning::
 
@@ -58,7 +58,7 @@ class Base(metaclass=abstract.Meta):
 
             [
                 ...,
-                bgmi.protocol.source.Series(
+                bgmi3.protocol.source.Series(
                     **{
                         "id": "1234",
                         "status": model.SeriesStatus.UPDATING,
@@ -77,7 +77,7 @@ class Base(metaclass=abstract.Meta):
 
             [
                 ...,
-                bgmi.protocol.source.Subtitle(id="233", name="bgmi字幕组"),
+                bgmi3.protocol.source.Subtitle(id="233", name="bgmi字幕组"),
                 ...,
             ]
 

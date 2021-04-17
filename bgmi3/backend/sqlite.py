@@ -12,15 +12,15 @@ from pydantic import BaseSettings, ValidationError
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
-import bgmi.core
-from bgmi import db
-from bgmi.db import table
-from bgmi.exc import ConfigNotValid, SeriesNotFollowed
-from bgmi.protocol import backend
+import bgmi3.core
+from bgmi3 import db
+from bgmi3.db import table
+from bgmi3.exc import ConfigNotValid, SeriesNotFollowed
+from bgmi3.protocol import backend
 
 
 class SqliteConfig(BaseSettings):
-    db_path: str = os.path.expanduser("~/.bgmi/app.db")
+    db_path: str = os.path.expanduser("~/.bgmi3/app.db")
 
 
 class SQLiteBackend(backend.Base):
@@ -61,7 +61,7 @@ class SQLiteBackend(backend.Base):
         finally:
             session.close()
 
-    def add_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def add_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         session = self.Session()
         session.add(
             db.table.Subscription(
@@ -88,13 +88,13 @@ class SQLiteBackend(backend.Base):
             else:
                 raise
 
-    def remove_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def remove_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         with self.get_session() as session:
             session.execute(
                 sa.delete(table.Subscription, table.Subscription.name == sub.name)
             )
 
-    def get_subscription(self, sub_name: str) -> "bgmi.core.Subscription":
+    def get_subscription(self, sub_name: str) -> "bgmi3.core.Subscription":
         with self.get_session() as session:
             row: table.Subscription = (
                 session.query(table.Subscription).filter_by(name=sub_name).first()
@@ -104,20 +104,20 @@ class SQLiteBackend(backend.Base):
             )
             data = row.dict()
             data["series"] = [x.to_core_obj() for x in series]
-        return bgmi.core.Subscription(**data)
+        return bgmi3.core.Subscription(**data)
 
-    def save_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def save_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         self.add_subscription(sub)
 
     def get_all_subscription(
         self, filters: typing.Dict[str, typing.Any] = None
-    ) -> typing.List["bgmi.core.Subscription"]:
+    ) -> typing.List["bgmi3.core.Subscription"]:
         if filters is None:
             filters = {}
 
         with self.get_session() as session:
-            subscriptions: typing.Dict[str, bgmi.core.Subscription] = {
-                x.name: bgmi.core.Subscription(**x.dict())
+            subscriptions: typing.Dict[str, bgmi3.core.Subscription] = {
+                x.name: bgmi3.core.Subscription(**x.dict())
                 for x in session.query(table.Subscription).filter_by(**filters)
             }
 
@@ -128,7 +128,7 @@ class SQLiteBackend(backend.Base):
 
         return list(subscriptions.values())
 
-    def get_series(self, source_id: str, name: str) -> "bgmi.core.Series":
+    def get_series(self, source_id: str, name: str) -> "bgmi3.core.Series":
         """todo
 
         :param source_id: source id

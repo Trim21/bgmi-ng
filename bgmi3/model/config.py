@@ -15,7 +15,7 @@ class DownloadDelegateEnum(str, enum.Enum):
 
 
 def get_bgmi_path() -> str:
-    p = os.path.normpath(os.environ.get("BGMI_PATH", os.path.expanduser("~/.bgmi")))
+    p = os.path.normpath(os.environ.get("BGMI_PATH", os.path.expanduser("~/.bgmi3")))
     if not p:
         p = tempfile.mkdtemp()
         print("$HOME and $BGMI_PATH not set, use a tmp dir " + p)
@@ -68,13 +68,13 @@ class WritableConfig(BaseSettings):
 
 
 class Config(WritableConfig):
-    """user defined in ``$BGMI_PATH/bgmi.cfg``"""
+    """user defined in ``$BGMI_PATH/bgmi3.cfg``"""
 
     # DB_PATH: str = os.path.join(BGMI_PATH, 'bangumi.db')
 
     is_windows = platform.system() == "Windows"
     show_warning = bool(os.getenv("DEV") or os.getenv("DEBUG"))
-    #: path of bgmi path, not project path
+    #: path of bgmi3 path, not project path
     src_root = os.path.normpath(os.path.join(os.path.dirname(__file__), ".."))
 
     @property
@@ -83,7 +83,7 @@ class Config(WritableConfig):
 
     @property
     def config_file_path(self) -> str:
-        return os.path.join(self.bgmi_path, "bgmi.cfg")
+        return os.path.join(self.bgmi_path, "bgmi3.cfg")
 
     @property
     def tools_path(self) -> str:

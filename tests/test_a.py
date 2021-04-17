@@ -1,4 +1,4 @@
-from bgmi import __version__
+from bgmi3 import __version__
 
 
 def test_a():

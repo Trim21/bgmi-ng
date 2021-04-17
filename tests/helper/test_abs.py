@@ -1,6 +1,6 @@
 import pytest
 
-from bgmi.helper import abstract
+from bgmi3.helper import abstract
 
 
 class BaseWIthClassMethod(metaclass=abstract.Meta):

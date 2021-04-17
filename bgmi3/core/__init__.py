@@ -8,10 +8,10 @@ a ``Subscription`` has many ``Series``
 
 ``Series`` is created by source
 """
-from bgmi.core import namespace
-from bgmi.core.application import BGmi
-from bgmi.core.series import Series
-from bgmi.core.subscription import Subscription
+from bgmi3.core import namespace
+from bgmi3.core.application import BGmi
+from bgmi3.core.series import Series
+from bgmi3.core.subscription import Subscription
 
 __all__ = [
     "namespace",

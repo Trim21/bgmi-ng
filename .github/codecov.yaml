@@ -2,4 +2,4 @@ ignore:
   - examples  # tested, but exclude from coverage report
   - tests  # wildcards accepted
   - docs  # wildcards accepted
-  - bgmi/backend/migrations/env.py
+  - bgmi3/backend/migrations/env.py

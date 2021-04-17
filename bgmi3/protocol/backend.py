@@ -2,11 +2,11 @@
 import abc
 import typing
 
-import bgmi.exc
-from bgmi.helper import abstract
+import bgmi3.exc
+from bgmi3.helper import abstract
 
 if typing.TYPE_CHECKING:
-    import bgmi.core
+    import bgmi3.core
 
 
 class Base(metaclass=abstract.Meta):
@@ -39,7 +39,7 @@ class Base(metaclass=abstract.Meta):
     #     """
 
     @abc.abstractmethod
-    def add_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def add_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         """save a subscription to backend
 
         ..
@@ -49,7 +49,7 @@ class Base(metaclass=abstract.Meta):
         """
 
     @abc.abstractmethod
-    def remove_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def remove_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         """remove a subscription from backend
 
         do nothing when record doesn't exist
@@ -61,7 +61,7 @@ class Base(metaclass=abstract.Meta):
         """
 
     @abc.abstractmethod
-    def get_subscription(self, sub_name: str) -> "bgmi.core.Subscription":
+    def get_subscription(self, sub_name: str) -> "bgmi3.core.Subscription":
         """get a subscription from backend
 
         ..
@@ -69,11 +69,11 @@ class Base(metaclass=abstract.Meta):
 
         :param sub_name: subscription name
         :return: Subscription matched
-        :raises bgmi.exc.SubscriptionNotFollowed: Subscription not found
+        :raises bgmi3.exc.SubscriptionNotFollowed: Subscription not found
         """
 
     @abc.abstractmethod
-    def save_subscription(self, sub: "bgmi.core.Subscription") -> None:
+    def save_subscription(self, sub: "bgmi3.core.Subscription") -> None:
         """save or create subscription and it's series to backend
 
         if subscription is not dirty, do nothing
@@ -84,7 +84,7 @@ class Base(metaclass=abstract.Meta):
     @abc.abstractmethod
     def get_all_subscription(
         self, filters: typing.Dict[str, typing.Any] = None
-    ) -> typing.List["bgmi.core.Subscription"]:
+    ) -> typing.List["bgmi3.core.Subscription"]:
         """get a subscription from backend
 
         ..
@@ -92,11 +92,11 @@ class Base(metaclass=abstract.Meta):
 
         :param filters: filter when getting all subscription
         :return: Subscription matched
-        :raises bgmi.exc.SubscriptionNotFollowed: Subscription not found
+        :raises bgmi3.exc.SubscriptionNotFollowed: Subscription not found
         """
 
     @abc.abstractmethod
-    def get_series(self, source_id: str, name: str) -> "bgmi.core.Series":
+    def get_series(self, source_id: str, name: str) -> "bgmi3.core.Series":
         """get a series from backend
 
         ..
@@ -105,5 +105,5 @@ class Base(metaclass=abstract.Meta):
         :param source_id: source id
         :param name: series name
         :return: Series matched
-        :raises bgmi.exc.SeriesNotFollowed: Series not found
+        :raises bgmi3.exc.SeriesNotFollowed: Series not found
         """

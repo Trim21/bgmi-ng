@@ -1,9 +1,9 @@
 import dataclasses
 from typing import List
 
-from bgmi.core.series import Series
-from bgmi.exc import SubscriptionNotFollowed
-from bgmi.protocol import strainer
+from bgmi3.core.series import Series
+from bgmi3.exc import SubscriptionNotFollowed
+from bgmi3.protocol import strainer
 
 
 @dataclasses.dataclass

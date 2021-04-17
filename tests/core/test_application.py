@@ -4,10 +4,10 @@ from typing import Iterable, List, Tuple
 import pytest
 import stevedore
 
-from bgmi.core import BGmi, Series, Subscription, namespace
-from bgmi.model import Config
-from bgmi.protocol import backend, source
-from bgmi.protocol.source import Episode, Subtitle
+from bgmi3.core import BGmi, Series, Subscription, namespace
+from bgmi3.model import Config
+from bgmi3.protocol import backend, source
+from bgmi3.protocol.source import Episode, Subtitle
 
 
 class MockBackend(backend.Base):
