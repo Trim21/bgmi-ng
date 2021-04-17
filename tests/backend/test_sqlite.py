@@ -11,15 +11,15 @@ from bgmi.core import Subscription
 from bgmi.exc import ConfigNotValid, SeriesNotFollowed
 
 
-@pytest.fixture
+@pytest.fixture()
 def sqlite_db_config(tmpdir):
-    yield SqliteConfig.parse_obj({"db_path": os.path.join(tmpdir, "test.db")})
+    return SqliteConfig.parse_obj({"db_path": os.path.join(tmpdir, "test.db")})
 
 
-@pytest.fixture
+@pytest.fixture()
 def sqlite_backend(sqlite_db_config):
     SQLiteBackend.install(sqlite_db_config.dict())
-    yield SQLiteBackend(sqlite_db_config.dict())
+    return SQLiteBackend(sqlite_db_config.dict())
 
 
 def test_install(sqlite_db_config: SqliteConfig):

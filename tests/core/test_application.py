@@ -59,9 +59,9 @@ class MockSource(source.Base):
         pass
 
 
-@pytest.fixture
+@pytest.fixture()
 def mock_backend():
-    yield MockBackend()
+    return MockBackend()
 
 
 def test_create(mock_backend):

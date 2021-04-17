@@ -96,12 +96,12 @@ class SQLiteBackend(backend.Base):
 
     def get_subscription(self, sub_name: str) -> "bgmi.core.Subscription":
         with self.get_session() as session:
-            row: table.Subscription = session.query(table.Subscription).filter_by(
-                name=sub_name
-            ).first()
-            series: typing.List[table.Series] = session.query(table.Series).filter_by(
-                sub_name=sub_name
-            ).all()
+            row: table.Subscription = (
+                session.query(table.Subscription).filter_by(name=sub_name).first()
+            )
+            series: typing.List[table.Series] = (
+                session.query(table.Series).filter_by(sub_name=sub_name).all()
+            )
             data = row.dict()
             data["series"] = [x.to_core_obj() for x in series]
         return bgmi.core.Subscription(**data)

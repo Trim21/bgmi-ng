@@ -1,106 +1,61 @@
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.0.0
+  - repo: https://github.com/Trim21/pre-commit-hooks
+    rev: c7a95cc4bd7861446be192a3b83c7a2ca1d6d910  # frozen: v0.2.3
     hooks:
-      - id: check-ast
+      - id: yamlfmt
+      - id: poetry-check-lock
+      - id: find-trailing-comma
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 6e2418c5521b7d606e72914dced3253f9ace1205  # frozen: v3.4.0
+    hooks:
       - id: check-merge-conflict
-        exclude: '\.rst$'
+        exclude: \.rst$
 
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-docstring-first
+
       - id: mixed-line-ending
         args: [--fix=lf]
+
       - id: check-json
-      # check for file bigger than 500kb
-      - id: check-added-large-files
+      - id: check-added-large-files  # check for file bigger than 500kb
       - id: check-yaml
       - id: debug-statements
       - id: fix-encoding-pragma
         args: [--remove]
 
-  - repo: https://github.com/Trim21/find-trailing-comma
-    rev: v0.0.1
-    hooks:
-      - id: find-trailing-comma
-
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.4.1
+    rev: d94dd3486f99af99b5779e38e60a69bf97522051  # frozen: v2.10.0
     hooks:
       - id: pyupgrade
-        args: ["--py36-plus"]
+        args: [--py36-plus]
 
-  - repo: https://github.com/PyCQA/doc8
-    rev: 0.8.1rc3
-    hooks:
-      - id: doc8
-        args: ["--max-line-length", "88", "-v"]
-        files: \.rst$
-        exclude: '.*/_autoapi/.*\.rst$'
-
-  - repo: https://github.com/Trim21/mirrors-autoflake
-    rev: v1.3.1
+  - repo: https://github.com/myint/autoflake
+    rev: 7a53fdafc82c33f446915b60fcac947c51279260  # frozen: v1.4
     hooks:
       - id: autoflake
-        require_serial: true
         args:
-          ["--in-place", "--remove-unused-variables", "--expand-star-imports"]
+          - --in-place
+          - --remove-unused-variables
+          - --remove-all-unused-imports
+          - --expand-star-imports
 
   - repo: https://github.com/timothycrosley/isort
-    rev: 4.3.21-2
+    rev: 473d150c1db60f4614a574e30993e9e0d3ca0cce  # frozen: 5.7.0
     hooks:
       - id: isort
-        require_serial: true
-        files: '.*\.py$'
         args:
-          [
-            "--line-width=88",
-            "--trailing-comma",
-            "--multi-line=3",
-            "--project=bgmi",
-            "--section-default=THIRDPARTY",
-          ]
+          - --line-width=88
+          - --trailing-comma
+          - --multi-line=3
+          - --project=bgmi
+          - --force-grid-wrap=0
+          - --use-parentheses
+          - -sd=THIRDPARTY
 
-  - repo: https://github.com/Trim21/poetry-check-lock
-    rev: v0.0.3
-    hooks:
-      - id: poetry-check-lock
-
-  - repo: local
+  - repo: https://github.com/psf/black
+    rev: e66be67b9b6811913470f70c28b4d50f94d05b22  # frozen: 20.8b1
     hooks:
       - id: black
-        name: black
-        entry: black
-        require_serial: true
-        language: system
-        types: [python]
-
-      - id: mypy
-        name: mypy
-        entry: mypy
-        language: system
-        types: [python]
-        args: ["--ignore-missing-imports"]
-        require_serial: true
-        exclude: '^.*[\\/](test_[^\\/]*)\.py$' # exclude file name starts with 'test_'
-
-      - id: flake8
-        name: flake8
-        entry: flake8
-        language: system
-        types: [python]
-        args: ["--max-line-length=89", "--ignore=C812"]
-
-      - id: poetry
-        name: poetry
-        entry: poetry check
-        language: system
-        pass_filenames: false
-        require_serial: false
-        files: "pyproject.toml"
-
-      - id: blacken-docs
-        name: blacken-docs
-        entry: blacken-docs
-        language: system
-        files: '\.(rst|md|markdown|py|tex)$'

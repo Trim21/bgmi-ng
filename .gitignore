@@ -13,6 +13,7 @@ bgmi.egg-info
 env
 tmp/
 docs/source/autoapi
+.venv
 
 # coverage
 .coverage
