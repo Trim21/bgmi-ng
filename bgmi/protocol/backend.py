@@ -23,10 +23,10 @@ class Base(metaclass=abstract.Meta):
     @abc.abstractmethod
     def install(cls, config: dict) -> None:
         """install backend, like create tables,
-         only will be called after ``Backend`` change
+        only will be called after ``Backend`` change
 
-         :param config: backend config
-         """
+        :param config: backend config
+        """
 
     # @classmethod
     # @abc.abstractmethod

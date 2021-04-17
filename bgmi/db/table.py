@@ -29,7 +29,10 @@ class Subscription(Base, ORMMixin):
     name = Column(String(50), primary_key=True, nullable=False)
     episode = Column(Integer, nullable=False, server_default="0")
     updating = Column(
-        Boolean, nullable=False, index=False, server_default=expression.false(),
+        Boolean,
+        nullable=False,
+        index=False,
+        server_default=expression.false(),
     )
 
 
@@ -75,6 +78,7 @@ __all__ = [
 
 if __name__ == "__main__":
     import os.path
+
     from sqlalchemy import create_engine
 
     print(os.path.expanduser("~/.bgmi/app.db"))
