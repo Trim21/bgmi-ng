@@ -41,7 +41,7 @@ python = "^3.6.1"
 # dependencies
 stevedore = "3.3.0"
 pydantic = "1.8.1"
-sqlalchemy = "1.4.9"
+sqlalchemy = "==1.4.11"
 alembic = "1.5.8"
 importlib_metadata = "3.10.1"
 # docs
